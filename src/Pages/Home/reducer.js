@@ -10,8 +10,7 @@ export const initialState = {
   item: {},
   loading: false,
   error: false,
-  yourData: false,
-  yourData2: false,
+  list: [],
 };
 
 const homeReducer = (state = initialState, action) =>
@@ -25,14 +24,11 @@ const homeReducer = (state = initialState, action) =>
 
       case LOAD_DATA:
         draft.loading = true;
-        draft.error = false;
-        draft.yourData.repositories = false;
         break;
 
       case LOAD_DATA_SUCCESS:
-        draft.yourData.repositories = action.BURAYA_NE_GELIYOSA;
+        draft.list = action.value;
         draft.loading = false;
-        draft.yourData = action.BURAYA_NE_GELIYOSA;
         break;
 
       case LOAD_DATA_ERROR:
@@ -41,5 +37,5 @@ const homeReducer = (state = initialState, action) =>
         break;
     }
   });
-  
+
 export default homeReducer;

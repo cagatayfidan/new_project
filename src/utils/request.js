@@ -1,25 +1,20 @@
 import axios from "axios";
 
-function parseJSON(response) {
-  if (response.status === 204 || response.status === 205) {
-    return null;
-  }
-  return response.json();
-}
+const createAxios = (url) =>
+  axios.create({
+    baseURL: `https://reqres.in/api/${url}`,
+    timeout: 1000,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    validateStatus(status) {
+      return status >= 200 && status < 501;
+    },
+  });
 
-export const instance = axios.create({
-  baseURL: "//reqres.in/api",
-  timeout: 1000,
-});
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  }
+var users = createAxios("users");
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
-}
-export default function request(url, options) {
-  return instance.get(url, options).then(checkStatus).then(parseJSON);
-}
+var ApiStore = {
+  users: users,
+};
+export default ApiStore;

@@ -2,9 +2,9 @@ import invariant from "invariant";
 import { isEmpty, isFunction, isString, conformsTo } from "lodash";
 import checkStore from "./checkStore";
 
-import { DEAMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from "./constants";
+import { DAEMON, ONCE_TILL_UNMOUNT, RESTART_ON_REMOUNT } from "./constants";
 
-const allowedModes = [RESTART_ON_REMOUNT, ONCE_TILL_UNMOUNT, DEAMON];
+const allowedModes = [RESTART_ON_REMOUNT, ONCE_TILL_UNMOUNT, DAEMON];
 
 const checkKey = (key) => {
   invariant(
@@ -26,10 +26,10 @@ const checkDescriptor = (descriptor) => {
 
 export function injectSagaFactory(store, isValid) {
   return function injectSaga(key, descriptor = {}, args) {
-    if (!isValid) chechkStore(store);
+    if (!isValid) checkStore(store);
     const newDescriptor = {
       ...descriptor,
-      mode: descriptor.mode || DEAMON,
+      mode: descriptor.mode || DAEMON,
     };
     const { saga, mode } = newDescriptor;
 
@@ -39,10 +39,12 @@ export function injectSagaFactory(store, isValid) {
     let hasSaga = Reflect.has(store.injectedSagas, key);
 
     if (process.env.NODE_ENV !== "production") {
+      console.log('asd',store)
+
       const olDescriptor = store.injectSagas[key];
       //enable hot reloading of daemon and once-till-unmount sagas
-      if (hasSaga && oldDescriptor.saga !== saga) {
-        oldDescriptor.task.cancel();
+      if (hasSaga && olDescriptor.saga !== saga) {
+        olDescriptor.task.cancel();
         hasSaga = false;
       }
     }
@@ -63,7 +65,7 @@ export function injectSagaFactory(store, isValid) {
 
 export function ejectSagaFactory(store, isValid) {
   return function ejectSaga(key) {
-    if (!isValid) chechkStore(key);
+    if (!isValid) checkStore(key);
 
     checkKey(key);
 
@@ -74,7 +76,7 @@ export function ejectSagaFactory(store, isValid) {
         //Clean up in production; in development we need 'descriptor.saga'
         if (process.env.NODE_ENV === "production") {
           //Need some value to be able to detect 'ONCE_TILL_UNMOUT' sagas in 'injectSaga'
-          store.injectSagas[key] = done; //eslint-disable-line no-param-reassign
+          store.injectSagas[key] = 'done'; //eslint-disable-line no-param-reassign
         }
       }
     }

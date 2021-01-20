@@ -16,11 +16,10 @@ export function loadData() {
     type: LOAD_DATA,
   };
 }
-export function loadDataSuccess(yourData, yourData2) {
+export function loadDataSuccess(value) {
   return {
     type: LOAD_DATA_SUCCESS,
-    yourData,
-    yourData2,
+    value,
   };
 }
 export function loadDataError(error) {
