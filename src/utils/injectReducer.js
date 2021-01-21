@@ -12,7 +12,7 @@ import getInjectors from "./reducerInjectors";
  *
  */
 
-export default ({ key, reducer }) => (WrappedComponent) => {
+export const reducerInjectorFunc = ({ key, reducer }) => (WrappedComponent) => {
   class ReducerInjector extends React.Component {
     static WrappedComponent = WrappedComponent;
 
@@ -37,7 +37,8 @@ const useInjectReducer = ({ key, reducer }) => {
   const context = React.useContext(ReactReduxContext);
   React.useEffect(() => {
     getInjectors(context.store).injectReducer(key, reducer);
-  }, []);
+  }, [context, key, reducer]);
 };
 
 export { useInjectReducer };
+export default reducerInjectorFunc;

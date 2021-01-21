@@ -39,22 +39,19 @@ export function injectSagaFactory(store, isValid) {
     let hasSaga = Reflect.has(store.injectedSagas, key);
 
     if (process.env.NODE_ENV !== "production") {
-      console.log('asd',store)
-
-      const olDescriptor = store.injectSagas[key];
+      const olDescriptor = store.injectedSagas[key];
       //enable hot reloading of daemon and once-till-unmount sagas
       if (hasSaga && olDescriptor.saga !== saga) {
         olDescriptor.task.cancel();
         hasSaga = false;
       }
     }
-
     if (
       !hasSaga ||
       (hasSaga && mode !== DAEMON && mode !== ONCE_TILL_UNMOUNT)
     ) {
       /*eslint-disable no-param-reassign*/
-      store.injectSagas[key] = {
+      store.injectedSagas[key] = {
         ...newDescriptor,
         task: store.runSaga(saga, args),
       };
@@ -69,14 +66,14 @@ export function ejectSagaFactory(store, isValid) {
 
     checkKey(key);
 
-    if (Reflect.has(store.injectSagas, key)) {
-      const descriptor = store.injectSagas[key];
+    if (Reflect.has(store.injectedSagas, key)) {
+      const descriptor = store.injectedSagas[key];
       if (descriptor.mode && descriptor.mode !== DAEMON) {
         descriptor.task.cancel();
         //Clean up in production; in development we need 'descriptor.saga'
         if (process.env.NODE_ENV === "production") {
           //Need some value to be able to detect 'ONCE_TILL_UNMOUT' sagas in 'injectSaga'
-          store.injectSagas[key] = 'done'; //eslint-disable-line no-param-reassign
+          store.injectedSagas[key] = 'done'; //eslint-disable-line no-param-reassign
         }
       }
     }

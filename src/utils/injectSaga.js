@@ -16,7 +16,7 @@ import getInjectors from "./sagaInjectors";
     - constants.ONCE_TILL_UNMOUNT- behaves like 'RESTART_ON_REMOUN'  but never runs it again.
 */
 
-export default ({ key, saga, mode }) => (WrappedComponent) => {
+export const injectSagaFunc = ({ key, saga, mode }) => (WrappedComponent) => {
   class InjectSaga extends React.Component {
     static WrappedComponent = WrappedComponent;
 
@@ -49,16 +49,13 @@ export default ({ key, saga, mode }) => (WrappedComponent) => {
 const useInjectSaga = ({ key, saga, mode }) => {
   const context = React.useContext(ReactReduxContext);
   React.useEffect(() => {
-    /*const injectors = getInjectors(context.store);
-    injectors.injectSaga(key, { saga, mode });*/
+    const injectors = getInjectors(context.store);
+    injectors.injectSaga(key, { saga, mode });
     return () => {
-      const injectors = getInjectors(context.store).injectSaga(key, {
-        saga,
-        mode,
-      });
       injectors.ejectSaga(key);
     };
-  }, []);
+  }, [key, saga, mode, context]);
 };
 
 export { useInjectSaga };
+export default injectSagaFunc;

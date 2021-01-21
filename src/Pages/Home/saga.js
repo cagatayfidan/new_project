@@ -10,7 +10,7 @@ import ApiStore from "../../utils/request";
  */
 export function* loadData() {
   try {
-      const response =yield ApiStore.users.get()
+      const response = yield ApiStore.users.get()
     yield put(loadDataSuccess(response.data.data))
   } catch (err) {
     yield put(loadDataError(err));

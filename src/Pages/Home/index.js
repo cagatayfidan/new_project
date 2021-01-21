@@ -12,20 +12,14 @@ import reducer from "./reducer";
 import saga from "./saga";
 
 import styles from "./style.module.scss";
-import Navigation from "../../Components/Navigation";
-//import { Col, Container, Row } from "react-bootstrap";
+
 const key = "home";
-export function Home({}) {
+export function Home() {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
   return (
     <div className={styles.home}>
-      <Navigation />
-      <h2>
-        <strong>Türkiye’nin dijital platformu</strong> Edsen'de
-      </h2>
-      <div style={{ color: "red" }}>
-        
+      <div style={{ color: "red" }}> 
       </div>
     </div>
   );
