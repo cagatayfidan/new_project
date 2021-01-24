@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "connected-react-router": "^6.8.0",
+    "formik": "^2.2.6",
     "history": "^5.0.0",
     "hoist-non-react-statics": "^3.3.2",
     "immer": "3.0.0",
@@ -26,7 +27,8 @@
     "redux": "4.0.1",
     "redux-saga": "^1.0.2",
     "reselect": "^4.0.0",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",

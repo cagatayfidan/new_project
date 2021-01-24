@@ -1,0 +1,17 @@
+.formGroup {
+  div {
+    text-align: left;
+    margin-top: 5px;
+  }
+  input {
+    float: right;
+    outline: none;
+    &:last-child {
+      float: left;
+    }
+  }
+  button {
+    float: right;
+    margin-right: 3px;
+  }
+}

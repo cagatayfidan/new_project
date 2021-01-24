@@ -5,16 +5,10 @@ import PropTypes from "prop-types";
 
 import { useInjectSaga } from "../../utils/injectSaga";
 import { useInjectReducer } from "../../utils/injectReducer";
+import ApiStore from "../../utils/request";
 
-import {
-  loadData,
-  loadDataError,
-  loadDataSuccess,
-  postData,
-  postDataError,
-  postDataSuccess,
-} from "./actions";
-import { makeSelectHome } from "./selector";
+import { loadData, loadDataError, loadDataSuccess } from "./actions";
+import { makeSelectUser } from "./selector";
 import reducer from "./reducer";
 import saga from "./saga";
 
@@ -23,19 +17,21 @@ import styles from "./style.module.scss";
 import "../../App.css";
 
 import Navigation from "../../Components/Navigation";
-import FormGroup from "../../Components/FormGroup";
+import UserList from "../../Components/UserList";
 
-const key = "home";
+const key = "user";
 
-export function Home({ home, postDataFunc, postDataError, postDataSuccess }) {
-  useEffect(() => {}, [postDataFunc, postDataError, postDataSuccess]);
+export function User({ user, loadDataFunc }) {
+  useEffect(() => {
+    ApiStore.users.get().then(() => loadDataFunc());
+  }, [loadDataFunc]);
 
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
   return (
     <div className={styles.home}>
-      <Navigation brand={"Home"} />
+      <Navigation brand={"User"} />
       <Container>
         <Row className="mt-40">
           <Col>
@@ -43,12 +39,8 @@ export function Home({ home, postDataFunc, postDataError, postDataSuccess }) {
           </Col>
         </Row>
         <Row>
-          <Col md={"5"}>
-            <FormGroup
-              postError={postDataError}
-              postReducer={postDataFunc}
-              postSuccess={postDataSuccess}
-            />
+          <Col>
+            <UserList users={user.list} />
           </Col>
         </Row>
       </Container>
@@ -56,13 +48,13 @@ export function Home({ home, postDataFunc, postDataError, postDataSuccess }) {
   );
 }
 
-Home.propTypes = {
+User.propTypes = {
   list: PropTypes.array,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 const mapStateToProps = createStructuredSelector({
-  home: makeSelectHome(),
+  user: makeSelectUser(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -76,15 +68,6 @@ export function mapDispatchToProps(dispatch) {
     loadDataErrorFunc: () => {
       dispatch(loadDataError());
     },
-    postDataFunc: () => {
-      dispatch(postData());
-    },
-    postDataSuccessFunc: () => {
-      dispatch(postDataSuccess());
-    },
-    postDataErrorFunc: () => {
-      dispatch(postDataError());
-    },
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(User);
