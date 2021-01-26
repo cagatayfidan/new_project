@@ -9,7 +9,7 @@ import NavigationItemsUser from "../NavigationItemsUser";
 export default function Navigation({brand}) {
   return (
     <div className={styles.Navigation}>
-      <Navbar>
+      <Navbar>        
         <Navbar.Brand href="/home">
           <span>{brand}</span>
         </Navbar.Brand>

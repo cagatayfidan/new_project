@@ -1,0 +1,14 @@
+.navigationItemUser {
+  div {
+    a {
+      span {
+        @media only screen and (max-width: 320px) {
+          font-size: 10px;
+          &:first-child {
+            margin-left: 2px;
+          }
+        }
+      }
+    }
+  }
+}

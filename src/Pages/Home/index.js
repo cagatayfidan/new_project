@@ -38,12 +38,12 @@ export function Home({ home, postDataFunc, postDataError, postDataSuccess }) {
       <Navigation brand={"Home"} />
       <Container>
         <Row className="mt-40">
-          <Col>
+          <Col xs={"12"}>
             <h1>Lorem Ipsum</h1>
           </Col>
         </Row>
-        <Row>
-          <Col md={"5"}>
+        <Row className="justify-content-center">
+          <Col sm={"12"} md={"8"} lg={"6"} xl={"5"}>
             <FormGroup
               postError={postDataError}
               postReducer={postDataFunc}
