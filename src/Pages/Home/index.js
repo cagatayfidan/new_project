@@ -42,7 +42,7 @@ export function Home({ home, postDataFunc, postDataError, postDataSuccess }) {
             <h1>Lorem Ipsum</h1>
           </Col>
         </Row>
-        <Row className="justify-content-center">
+        <Row className="justify-content-center mt-50">
           <Col sm={"12"} md={"8"} lg={"6"} xl={"5"}>
             <FormGroup
               postError={postDataError}
