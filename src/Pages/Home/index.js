@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import PropTypes from "prop-types";
-
 import { useInjectSaga } from "../../utils/injectSaga";
 import { useInjectReducer } from "../../utils/injectReducer";
 
@@ -23,19 +22,32 @@ import styles from "./style.module.scss";
 import "../../App.css";
 
 import Navigation from "../../Components/Navigation";
-import FormGroup from "../../Components/FormGroup";
-
+import FormGroup from "./form";
+import ApiStore from "../../utils/request";
 const key = "home";
 
-export function Home({ home, postDataFunc, postDataError, postDataSuccess }) {
-  useEffect(() => {}, [postDataFunc, postDataError, postDataSuccess]);
-
+export function Home({
+  home,
+  postDataFunc,
+  postDataErrorFunc,
+  postDataSuccessFunc,
+}) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
-
+  const setData = (values) => {
+    ApiStore.users
+      .post("/", values)
+      .then(postDataFunc)
+      .then(postDataSuccessFunc)
+      .catch(postDataErrorFunc);
+  };
   return (
     <div className={styles.home}>
-      <Navigation brand={"Home"} />
+      <Navigation
+        brand={"Home"}
+        textColor={"#7b96a7"}
+        navItems={["BBB", "AAA"]}
+      />
       <Container>
         <Row className="mt-40">
           <Col xs={"12"}>
@@ -45,9 +57,10 @@ export function Home({ home, postDataFunc, postDataError, postDataSuccess }) {
         <Row className="justify-content-center mt-50">
           <Col sm={"12"} md={"8"} lg={"6"} xl={"5"}>
             <FormGroup
-              postError={postDataError}
+              postError={postDataErrorFunc}
               postReducer={postDataFunc}
-              postSuccess={postDataSuccess}
+              postSuccess={postDataSuccessFunc}
+              setData={setData}
             />
           </Col>
         </Row>

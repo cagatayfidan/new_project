@@ -2,8 +2,98 @@
   h1 {
     color: #7b96a7;
     letter-spacing: 7px;
-    @media only screen and (max-width:540px) {
-        font-size: 30px !important;
+    @media only screen and (max-width: 540px) {
+      font-size: 30px !important;
+    }
+  }
+  .formGroup {
+    padding: 20px 20px;
+    h4 {
+      text-align: left;
+      color: #7b96a7;
+      @media only screen and(max-width:575px) {
+        font-size: 20px !important;
+      }
+    }
+    div {
+      text-align: left;
+      margin-top: 10px;
+    }
+    input {
+      float: right;
+      &:last-child {
+        float: left;
+      }
+    }
+    form {
+      .customLabel {
+        color: #7b96a7;
+      }
+      .customErrors {
+        display: inline;
+        font-size: 10px;
+        color: #5c3d46;
+        margin-left: 10px;
+        margin-top: 10px;
+        @media only screen and(max-width:380px) {
+          display: block;
+        }
+      }
+      .fileInput {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        input {
+          opacity: 0;
+          width: 100%;
+        }
+        .customFileInput {
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          z-index: 5;
+          height: 2.5rem;
+          padding: 0.5rem 1rem;
+          line-height: 1.5;
+          color: #555;
+          background-color: #fff;
+          border: 0.075rem solid #ddd;
+          border-radius: 0.25rem;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          &::before {
+            position: absolute;
+            top: -0.075rem;
+            right: -0.075rem;
+            bottom: -0.075rem;
+            z-index: 6;
+            display: block;
+            content: "Browse";
+            height: 2.5rem;
+            padding: 0.5rem 1rem;
+            line-height: 1.5;
+            color: #555;
+            background-color: #eee;
+            border: 0.075rem solid #ddd;
+            border-radius: 0 0.25rem 0.25rem 0;
+          }
+          &:after {
+            content: "Choose file...";
+          }
+        }
+      }
+      button {
+        background-color: #7b96a7 !important;
+        outline-color: #7b96a7 !important;
+        border-color: #7b96a7 !important;
+        float: right;
+        @media only screen and(max-width:575px) {
+          float: left;
+        }
+      }
     }
   }
 }
