@@ -8,13 +8,14 @@ const createAxios = (url) =>
       "Content-Type": "application/json; charset=utf-8",
     },
     validateStatus(status) {
-      return status >= 200 && status < 501;
+      return status >= 200 && status < 400;
     },
   });
 
 var users = createAxios("users");
-
+var register = createAxios("register");
 var ApiStore = {
   users: users,
+  register: register,
 };
 export default ApiStore;

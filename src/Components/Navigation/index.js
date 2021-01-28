@@ -8,8 +8,10 @@ export default function Navigation({ brand, navItems }) {
   return (
     <div className={styles.Navigation}>
       <Navbar>
-        <Navbar.Brand href="/home">
-          <span>{brand}</span>
+        <Navbar.Brand>
+          <Link style={{ color: "#7b96a7" }} to="/brand">
+            {brand}
+          </Link>
         </Navbar.Brand>
         <Nav className="mr-auto">
           {navItems.map((value, index) => {
@@ -22,7 +24,7 @@ export default function Navigation({ brand, navItems }) {
         </Nav>
         <Row className={styles.navigationItemUser}>
           <Col xs={"6"}>
-            <Link to="/home">
+            <Link to="/">
               <span>Lorem</span>
             </Link>
           </Col>

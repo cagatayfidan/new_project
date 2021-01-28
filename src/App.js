@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Home from "./Pages/Home";
+import Spinner from "./Components/Spinner";
 
 export class App extends React.Component {
   render() {
@@ -18,6 +19,7 @@ export class App extends React.Component {
             </Route>
           </Switch>
         </Router>
+        <Spinner />
       </div>
     );
   }

@@ -1,11 +1,13 @@
 import React from "react";
 import { Formik, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
+
 import { Button, Col, Row } from "react-bootstrap";
 import styles from "./style.module.scss";
 
 import Validations from "../../utils/validations";
 import CustomInput from "../../Components/CustomInput";
+
 export default function FormGroup({ setData }) {
   let valitadionSchema = Yup.object().shape({
     first_name: Validations.first_name,
