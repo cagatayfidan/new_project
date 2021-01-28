@@ -13,8 +13,8 @@ export const initialState = {
   loading: undefined,
   error: false,
   postSuccess: false,
-  postLoad: undefined,
-  postError:false
+  postLoad: false,
+  postError: false,
 };
 
 const homeReducer = (state = initialState, action) =>
@@ -37,13 +37,12 @@ const homeReducer = (state = initialState, action) =>
         draft.postLoad = true;
         break;
       case POST_DATA_SUCCESS:
-        draft.postSuccess = false;
+        draft.postLoad ? (draft.postSuccess = true) : (draft.postError = false);
         draft.postLoad = false;
         break;
-        case POST_DATA_ERROR:
-        draft.postSuccess = false;
-        draft.postLoad = false;
+      case POST_DATA_ERROR:
         draft.postError = true;
+        draft.postLoad = false;
         break;
     }
   });
