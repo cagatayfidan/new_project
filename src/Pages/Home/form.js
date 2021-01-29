@@ -17,7 +17,7 @@ export default function FormGroup({ setData }) {
   return (
     <div className={styles.formGroup}>
       <Formik
-        validationSchema={valitadionSchema}
+        //validationSchema={valitadionSchema}
         initialValues={{
           first_name: "",
           last_name: "",

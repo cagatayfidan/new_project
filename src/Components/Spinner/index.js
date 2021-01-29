@@ -4,6 +4,7 @@ import { createStructuredSelector } from "reselect";
 import { makeSelectSpinner } from "./selector";
 import { close } from "./actions";
 
+import styles from "./style.module.scss";
 const Spinner = ({ spinner, closeFunc }) => {
   const takeColor = () => {
     switch (spinner.status) {
@@ -26,17 +27,8 @@ const Spinner = ({ spinner, closeFunc }) => {
   }, [spinner.status, closeFunc]);
   return (
     <div
+      className={styles.spinner}
       style={{
-        position: "absolute",
-        top: "0",
-        bottom: "0",
-        left: "0",
-        right: "0",
-        margin: "auto",
-        width: "200px",
-        height: "200px",
-        zIndex: "999",
-        borderRadius: "15px",
         backgroundColor: takeColor(),
         display: spinner.status === null ? "none" : "block",
       }}
