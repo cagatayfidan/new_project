@@ -2,7 +2,7 @@ import produce from "immer";
 import { LOADING, LOAD_ERROR, LOAD_SUCCESS, CLOSE } from "./constants";
 
 export const initialState = {
-  status: "LOADING",
+  status: null,
 };
 
 const homeReducer = (state = initialState, action) =>

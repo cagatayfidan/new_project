@@ -3,21 +3,9 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { makeSelectSpinner } from "./selector";
 import { close } from "./actions";
-
 import styles from "./style.module.scss";
+
 const Spinner = ({ spinner, closeFunc }) => {
-  const takeColor = () => {
-    switch (spinner.status) {
-      case "LOAD_SUCCESS":
-        return "green";
-      case "LOAD_ERROR":
-        return "red";
-      case "LOADING":
-        return "gray";
-      default:
-        break;
-    }
-  };
   useEffect(() => {
     if (spinner.status === "LOAD_SUCCESS") {
       setTimeout(() => {
@@ -29,23 +17,19 @@ const Spinner = ({ spinner, closeFunc }) => {
     <div
       className={styles.spinner}
       style={{
-        backgroundColor: takeColor(),
-        display: spinner.status === null ? "none" : "block",
+        display: spinner.status === null ? "none" : "flex",
       }}
     >
-      {spinner.status === "LOADING" && (
-        <div>
-          <span>Loading</span>
-        </div>
-      )}
+      {spinner.status === "LOADING" && <div className={styles.loading}></div>}
       {spinner.status === "LOAD_SUCCESS" && (
-        <div>
-          <span>Success</span>
+        <div className={styles.success}>
+          <span>OK.</span>
         </div>
       )}
       {spinner.status === "LOAD_ERROR" && (
-        <div>
-          <span>Error</span>
+        <div className={styles.error}>
+          <span>OH!</span>
+          <span>NO!</span>
         </div>
       )}
     </div>
