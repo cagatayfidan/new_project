@@ -1,4 +1,4 @@
-This app builded for working redux-saga with form.
+This app built for working redux-saga with form.
 
 It's contains;
 
