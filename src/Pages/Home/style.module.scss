@@ -19,12 +19,6 @@
       text-align: left;
       margin-top: 10px;
     }
-    input {
-      float: right;
-      &:last-child {
-        float: left;
-      }
-    }
     form {
       .customLabel {
         color: #7b96a7;
@@ -89,10 +83,6 @@
         background-color: #7b96a7 !important;
         outline-color: #7b96a7 !important;
         border-color: #7b96a7 !important;
-        float: right;
-        @media only screen and(max-width:575px) {
-          float: left;
-        }
       }
     }
   }
